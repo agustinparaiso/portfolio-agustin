@@ -31,6 +31,7 @@ Mi objetivo:
 Cada proyecto tiene esta estructura:
 
 /proyecto-xx-nombre/
+
 │── /plugin/        → Código principal (plugins WP, scripts, funciones)
 
 │── /docs/          → Arquitectura, notas técnicas, flujos, diagramas
