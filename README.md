@@ -3,7 +3,9 @@ Portfolio  — Agustín Paraíso Gallardo
 Automatización • IA Aplicada • WordPress Avanzado • Integraciones Empresariales
 
 📍 Teletrabajo — España
+
 🧠 36 proyectos profesionales demostrando dominio real en automatización, IA y flujo operativo empresarial.
+
 🔗 Portfolio web + demos.
 
 Sobre este repositorio
@@ -48,9 +50,11 @@ Cada proyecto tiene esta estructura:
 (Serán añadidos cuando estén listos.)
 
 🌐 Portfolio Web (presentación profesional):
+
 https://porfolioagustinparaiso.com
 
 🧪 Demos Técnicas (subdominio WordPress):
+
 https://projects.porfolioagustinparaiso.com
 
 🧱 Categorías de los 36 proyectos
@@ -154,6 +158,7 @@ Sincronización interna de datos
 Documentación automática de procesos
 
 🛠️ Tecnologías utilizadas
+
 💡 Lenguajes & Desarrollo
 
 PHP (plugins WordPress)
