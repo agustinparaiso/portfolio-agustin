@@ -51,11 +51,11 @@ Cada proyecto tiene esta estructura:
 
 🌐 Portfolio Web (presentación profesional):
 
-https://porfolioagustinparaiso.com
+https://porfolioagustinparaiso.es
 
 🧪 Demos Técnicas (subdominio WordPress):
 
-https://projects.porfolioagustinparaiso.com
+https://projects.porfolioagustinparaiso.es
 
 🧱 Categorías de los 36 proyectos
 
@@ -199,4 +199,4 @@ Reporting y eficiencia operativa
 
 Agustín Paraíso Gallardo
 Automatización, IA Operativa y WordPress Profesional
-porfolioagustinparaiso.com
+porfolioagustinparaiso.es
