@@ -32,9 +32,13 @@ Cada proyecto tiene esta estructura:
 
 /proyecto-xx-nombre/
 │── /plugin/        → Código principal (plugins WP, scripts, funciones)
+
 │── /docs/          → Arquitectura, notas técnicas, flujos, diagramas
+
 │── /tests/         → Casos de prueba, Postman/cURL, validaciones
+
 │── /assets/        → Capturas, imágenes, diagramas, logos
+
 └── README.md       → Documentación completa del proyecto
 
 
