@@ -1,0 +1,367 @@
+/* Contenedor general del formulario (solo donde aparece el shortcode) */
+.agustin-pia-app-shell {
+  padding: 2.5rem 1rem 3rem;
+  background: radial-gradient(circle at top left, #020617 0, #020617 40%, #000 100%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Card principal “modo app” */
+.agustin-pia-form-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #020617;
+  border-radius: 20px;
+  padding: 2rem 1.75rem 2.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.agustin-pia-form-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.22), transparent 55%),
+    radial-gradient(circle at 10% 80%, rgba(94, 234, 212, 0.18), transparent 55%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.agustin-pia-form-wrapper > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Títulos */
+.agustin-pia-form-title {
+  margin: 0 0 .5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: #f9fafb;
+}
+
+.agustin-pia-form-subtitle {
+  margin: 0 0 1.5rem;
+  font-size: .9rem;
+  color: #cbd5f5;
+}
+
+/* Layout 2 columnas */
+.agustin-pia-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.agustin-pia-col {
+  min-width: 0;
+}
+
+/* Campos */
+.agustin-pia-field {
+  margin-bottom: 1rem;
+}
+
+.agustin-pia-field:last-child {
+  margin-bottom: 0;
+}
+
+.agustin-pia-field label {
+  display: block;
+  font-size: .86rem;
+  font-weight: 600;
+  margin-bottom: .35rem;
+  color: #f9fafb; /* MÁS CLARO */
+}
+
+.agustin-pia-field label span {
+  color: #f97373;
+}
+
+.agustin-pia-field small {
+  display: block;
+  margin-top: .25rem;
+  font-size: .78rem;
+  color: #cbd5f5; /* MÁS CLARO */
+}
+
+/* Inputs y selects */
+.agustin-pia-field input[type="text"],
+.agustin-pia-field input[type="number"],
+.agustin-pia-field select {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+  padding: .5rem .7rem;
+  font-size: .86rem;
+  line-height: 1.4;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+.agustin-pia-field input[type="text"]::placeholder,
+.agustin-pia-field input[type="number"]::placeholder {
+  color: rgba(148, 163, 184, .95); /* PLACEHOLDER VISIBLE */
+}
+
+.agustin-pia-field input[type="text"]:focus,
+.agustin-pia-field input[type="number"]:focus,
+.agustin-pia-field select:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.7);
+  background: #020617;
+}
+
+/* Selects deshabilitados (ej. Estado/Visibilidad cuando cambie la lógica) */
+.agustin-pia-field select:disabled,
+.agustin-pia-field input:disabled {
+  opacity: .85; /* SIGUE SIENDO LEGIBLE */
+  background: #020617;
+  color: #9ca3af;
+}
+
+/* Campo página padre envuelto (para ocultar/mostrar con JS) */
+.agustin-pia-parent-wrapper {
+  display: block;
+}
+
+/* Listas de categorías / etiquetas / productos */
+.agustin-pia-tax-list {
+  max-height: 220px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #020617; /* MÁS CLARO QUE EL FONDO DE LA CARD */
+  padding: .3rem .3rem .25rem;
+  overflow-y: auto;
+}
+
+.agustin-pia-tax-list-scroll {
+  max-height: 160px;
+}
+
+.agustin-pia-tax-item {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .18rem .35rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .82rem;
+  color: #e5e7eb;
+}
+
+.agustin-pia-tax-item:hover {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.agustin-pia-tax-item input[type="checkbox"] {
+  accent-color: #38bdf8;
+}
+
+/* Resultados de productos */
+.agustin-pia-product-search-row {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+
+.agustin-pia-product-results {
+  font-size: .8rem;
+  color: #cbd5f5;
+}
+
+/* Cada resultado de producto (texto + imagen) */
+.agustin-pia-product-result-item {
+  align-items: center;
+}
+
+.agustin-pia-product-result-content {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.agustin-pia-product-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #1f2937;
+}
+
+.agustin-pia-product-name {
+  font-size: .8rem;
+  color: #e5e7eb;
+}
+
+/* Botones */
+.agustin-pia-primary-btn,
+.agustin-pia-secondary-btn {
+  border-radius: 999px;
+  font-size: .86rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform .1s ease, box-shadow .1s ease, background .15s ease;
+}
+
+.agustin-pia-primary-btn {
+  padding: .55rem 1.3rem;
+  background: linear-gradient(to right, #38bdf8, #6366f1);
+  color: #0b1120;
+  box-shadow: 0 14px 30px rgba(56, 189, 248, 0.45);
+}
+
+.agustin-pia-primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(56, 189, 248, 0.55);
+}
+
+.agustin-pia-secondary-btn {
+  padding: .45rem .9rem;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.agustin-pia-secondary-btn:hover {
+  background: rgba(30, 64, 175, 0.9);
+}
+
+/* Acciones finales */
+.agustin-pia-actions {
+  margin-top: .75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: center;
+}
+
+.agustin-pia-hint {
+  font-size: .78rem;
+  color: #cbd5f5;
+}
+
+/* Resultado */
+.agustin-pia-result {
+  margin-top: 1.25rem;
+  padding: .85rem 1rem;
+  border-radius: 12px;
+  font-size: .86rem;
+  border: 1px dashed rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.85);
+  color: #e5e7eb;
+}
+
+.agustin-pia-result-loading {
+  border-style: solid;
+  border-color: rgba(56, 189, 248, 0.9);
+}
+
+.agustin-pia-result-error {
+  border-color: rgba(248, 113, 113, 0.9);
+  background: rgba(127, 29, 29, 0.85);
+}
+
+.agustin-pia-result-success {
+  border-color: rgba(34, 197, 94, 0.9);
+  background: rgba(22, 101, 52, 0.85);
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .agustin-pia-form-wrapper {
+    padding: 1.75rem 1.2rem 2rem;
+  }
+
+  .agustin-pia-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .agustin-pia-app-shell {
+    padding: 2rem .75rem 2.5rem;
+  }
+}
+/* === Grid de resultados de productos en 3 columnas === */
+
+.agustin-pia-product-results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  padding: .4rem;
+  background: #020617;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  max-height: none; /* sin scroll interno aquí */
+}
+
+/* Tarjeta de cada producto */
+.agustin-pia-product-result-item {
+  display: block;
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  padding: .5rem .55rem .6rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.agustin-pia-product-result-item:hover {
+  border-color: #38bdf8;
+}
+
+/* Imagen arriba */
+.agustin-pia-product-thumb {
+  width: 100%;
+  height: 110px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #1f2937;
+  margin-bottom: .4rem;
+}
+
+/* Placeholder si no hay imagen */
+.agustin-pia-product-thumb--empty {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+}
+
+/* Fila checkbox + título debajo de la imagen */
+.agustin-pia-product-meta-row {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.agustin-pia-product-meta-row input[type="checkbox"] {
+  accent-color: #38bdf8;
+  margin: 0;
+}
+
+.agustin-pia-product-name {
+  font-size: .8rem;
+  color: #e5e7eb;
+  line-height: 1.3;
+}
+
+/* Responsive: 2 columnas en tablets, 1 en móvil */
+@media (max-width: 900px) {
+  .agustin-pia-product-results {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .agustin-pia-product-results {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

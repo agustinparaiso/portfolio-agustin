@@ -1,0 +1,13 @@
+### Petición al endpoint del plugin
+
+POST https://projects.porfolioagustinparaiso.es/wp-json/agustin/v1/generate-content
+Content-Type: application/json
+X-WP-Nonce: {{nonce}}
+
+{
+  "keyword": "automatización de procesos con IA",
+  "author_name": "Agustín Paraíso",
+  "post_type": "post",
+  "post_status": "publish",
+  "visibility": "public"
+}
