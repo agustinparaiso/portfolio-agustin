@@ -13,7 +13,7 @@ El plugin automatiza tareas editoriales, mejora la estructura SEO y añade oport
 
 Artículos completos en HTML bien estructurado
 
-<h1>, <h2>, listas, bloques organizados y extracto automático
+h1, h2, listas, bloques organizados y extracto automático
 
 Imagen destacada generada con IA
 
