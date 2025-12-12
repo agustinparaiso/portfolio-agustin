@@ -37,19 +37,23 @@ Límite configurable de peticiones por minuto
 Protección mediante REST API + WP Nonces	
 API Key almacenada de forma segura	
 
-## 🧩 Arquitectura del plugin	
-publicador-automatico-ia/	
-│	
-├── publicador-automatico-ia.php      ← Archivo principal	
-├── includes/	
-│   ├── admin-settings.php            ← Ajustes del plugin	
-│   ├── shortcode-form.php            ← Formulario [ia_publicador_form]	
-│   ├── endpoint-generate.php         ← Integración con OpenAI	
-│   ├── helpers.php                   ← Funciones auxiliares	
-│   └── image-generation.php          ← Imagen destacada con IA	
-└── assets/	
-    ├── css/form.css	
-    ├── js/form.js	
+## 🧩 Arquitectura del plugin
 
-## 🔗 Enlace al proyecto	
-https://projects.porfolioagustinparaiso.es/proyecto-01	
+```text
+publicador-automatico-ia/
+│
+├── publicador-automatico-ia.php      ← Archivo principal
+├── includes/
+│   ├── admin-settings.php            ← Ajustes del plugin
+│   ├── shortcode-form.php            ← Formulario [ia_publicador_form]
+│   ├── endpoint-generate.php         ← Integración con OpenAI
+│   ├── helpers.php                   ← Funciones auxiliares
+│   └── image-generation.php          ← Imagen destacada con IA
+└── assets/
+    ├── css/form.css
+    ├── js/form.js
+```
+
+## 🔗 Enlace al proyecto
+https://projects.porfolioagustinparaiso.es/proyecto-01
+
