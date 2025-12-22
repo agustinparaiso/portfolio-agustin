@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+enum Role {
+  SUPERADMIN
+  ADMIN
+  EDITOR
+  REVIEWER
+}
+
+enum SessionStatus {
+  INICIADA
+  COMPLETADA_QUIZ
+  COMPUTADA
+  PLAN_GENERADO
+  PENDIENTE_REVISION
+  APROBADO
+  RECHAZADO
+  ENVIADO
+}
+
+enum PlanStatus {
+  PENDIENTE
+  EN_REVISION
+  APROBADO
+  RECHAZADO
+  ENVIADO
+}
+
+enum TemplateKind {
+  WORKOUT
+  NUTRITION
+  RULE
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String
+  role         Role
+  name         String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  plans        Plan[]    @relation("PlanReviewer")
+}
+
+model Session {
+  id              String         @id @default(cuid())
+  email           String?
+  name            String?
+  status          SessionStatus  @default(INICIADA)
+  responses       Json
+  currentStep     Int            @default(1)
+  computedMetrics Json?
+  goal            String?
+  dietType        String?
+  level           String?
+  place           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  plan            Plan?
+}
+
+model Plan {
+  id          Int        @id @default(autoincrement())
+  sessionId   String     @unique
+  status      PlanStatus @default(PENDIENTE)
+  rawResponse Json?
+  planJson    Json?
+  warnings    String?
+  approvedBy  Int?
+  approvedAt  DateTime?
+  notes       String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  session     Session    @relation(fields: [sessionId], references: [id])
+  reviewer    User?      @relation("PlanReviewer", fields: [approvedBy], references: [id])
+  logs        PlanLog[]
+}
+
+model PlanLog {
+  id        Int        @id @default(autoincrement())
+  planId    Int
+  message   String
+  actorId   Int?
+  actorRole Role?
+  createdAt DateTime   @default(now())
+  plan      Plan       @relation(fields: [planId], references: [id])
+}
+
+model Question {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique
+  title       String
+  description String?
+  helpHtml    String?
+  footerHtml  String?
+  type        String
+  order       Int
+  options     Json?
+  validations Json?
+  isSkippable Boolean  @default(false)
+  dependsOn   Json?
+  uiVariant   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Template {
+  id        Int           @id @default(autoincrement())
+  kind      TemplateKind
+  title     String
+  goal      String?
+  level     String?
+  place     String?
+  equipment String?
+  duration  String?
+  dietType  String?
+  cookTime  String?
+  content   Json
+}
+
+model PricingPlan {
+  id          Int      @id @default(autoincrement())
+  name        String
+  weeks       Int
+  priceTotal  Float
+  pricePerDay Float
+  badge       String?
+  trialDays   Int?
+  popular     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  age       Int?
+  quote     String
+  metric    String?
+  avatar    String
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id              Int      @id
+  useOpenAI       Boolean  @default(false)
+  model           String?
+  apiKeyEncrypted String?
+  temperature     Float?
+  maxTokens       Int?
+  promptSystem    String?
+  promptUser      String?
+  rateLimitPerMin Int?
+  masterKeyHint   String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
