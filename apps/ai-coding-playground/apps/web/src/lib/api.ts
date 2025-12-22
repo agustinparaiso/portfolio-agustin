@@ -25,7 +25,15 @@ export async function requestAi(
     body: JSON.stringify(payload),
   });
 
-  if (payload.stream) {
+  const contentType = res.headers.get("content-type") ?? "";
+  const isEventStream = contentType.includes("text/event-stream");
+
+  if (payload.stream && isEventStream) {
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error?.error?.message ?? "AI request failed");
+    }
+
     if (!res.body) throw new Error("Streaming not supported by browser");
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
@@ -68,10 +76,12 @@ export async function requestAi(
     return finalPayload;
   }
 
+  const json = await res.json();
+
   if (!res.ok) {
-    const error = await res.json();
+    const error = json;
     throw new Error(error?.error?.message ?? "AI request failed");
   }
 
-  return res.json();
+  return json;
 }
