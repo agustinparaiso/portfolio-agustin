@@ -1,0 +1,119 @@
+{
+  "descripcion": "Casos de prueba para el plugin Publicador Automático con IA usando la API de OpenAI.",
+  "modelo_por_defecto": "gpt-4.1-mini",
+  "parametros_por_defecto": {
+    "temperature": 0.7,
+    "top_p": 1,
+    "presence_penalty": 0,
+    "frequency_penalty": 0
+  },
+  "casos": [
+    {
+      "id": "test_001",
+      "descripcion": "Generar artículo sobre automatización de procesos en pymes.",
+      "entrada": {
+        "keyword": "automatización de procesos con IA para pymes",
+        "author_name": "Agustín Paraíso",
+        "post_type": "post",
+        "post_status": "draft",
+        "visibility": "public",
+        "categorias": ["Automatización de Procesos", "Inteligencia Artificial"],
+        "etiquetas": ["IA aplicada", "automatización avanzada"],
+        "productos_woocommerce": [],
+        "categorias_productos": []
+      },
+      "criterios_aceptacion": [
+        "El título contiene la idea de automatización e IA.",
+        "El contenido está en español.",
+        "El artículo incluye al menos un H1 y varios H2.",
+        "El texto menciona ejemplos aplicados a pymes."
+      ]
+    },
+    {
+      "id": "test_002",
+      "descripcion": "Generar artículo sobre la IA en las criptomonedas.",
+      "entrada": {
+        "keyword": "la inteligencia artificial en las criptomonedas",
+        "author_name": "Agustín Paraíso",
+        "post_type": "post",
+        "post_status": "publish",
+        "visibility": "public",
+        "categorias": ["Inteligencia Artificial", "Transformación Digital"],
+        "etiquetas": ["IA aplicada", "análisis estratégico"],
+        "productos_woocommerce": [101, 102],
+        "categorias_productos": []
+      },
+      "criterios_aceptacion": [
+        "El artículo menciona IA y criptomonedas de forma relacionada.",
+        "El contenido incluye una introducción, desarrollo y conclusión.",
+        "Se genera un extracto coherente.",
+        "El bloque de productos WooCommerce aparece al final del artículo."
+      ]
+    },
+    {
+      "id": "test_003",
+      "descripcion": "Probar generación como Página con página padre.",
+      "entrada": {
+        "keyword": "guía de automatización para negocios digitales",
+        "author_name": "Agustín Paraíso",
+        "post_type": "page",
+        "post_status": "publish",
+        "visibility": "private",
+        "pagina_padre": "Guías",
+        "categorias": [],
+        "etiquetas": ["productividad pro"],
+        "productos_woocommerce": [],
+        "categorias_productos": []
+      },
+      "criterios_aceptacion": [
+        "El contenido se crea como Página en WordPress.",
+        "La página queda asignada correctamente a la página padre.",
+        "La visibilidad se establece como privada.",
+        "El contenido mantiene la estructura HTML SEO-friendly."
+      ]
+    },
+    {
+      "id": "test_004",
+      "descripcion": "Generar contenido usando solo categorías de producto.",
+      "entrada": {
+        "keyword": "cómo usar IA para aumentar ventas en e-commerce",
+        "author_name": "Agustín Paraíso",
+        "post_type": "post",
+        "post_status": "publish",
+        "visibility": "public",
+        "categorias": ["Marketing Digital", "SEO y Analítica"],
+        "etiquetas": ["marketing automation", "escalado de negocio"],
+        "productos_woocommerce": [],
+        "categorias_productos": ["Consultoría Empresarial", "Automatización de Procesos"],
+        "limite_productos_por_categoria": 4
+      },
+      "criterios_aceptacion": [
+        "Se genera un bloque de productos por categoría seleccionada.",
+        "Cada bloque respeta el diseño de WooCommerce.",
+        "El contenido del artículo está relacionado con e-commerce y ventas.",
+        "El artículo invita a la acción o a contratar servicios."
+      ]
+    },
+    {
+      "id": "test_005",
+      "descripcion": "Caso de prueba para validar límites de uso por minuto.",
+      "entrada": {
+        "keyword": "prueba de límite de peticiones por minuto",
+        "author_name": "Tester",
+        "post_type": "post",
+        "post_status": "draft",
+        "visibility": "private",
+        "categorias": ["Auditorías Técnicas"],
+        "etiquetas": ["auditoría profesional"],
+        "productos_woocommerce": [],
+        "categorias_productos": [],
+        "forzar_multiples_peticion": true
+      },
+      "criterios_aceptacion": [
+        "Al superar el número de peticiones configurado, el plugin devuelve un mensaje de error amigable.",
+        "No se crean posts adicionales una vez superado el límite.",
+        "Los logs registran los intentos bloqueados."
+      ]
+    }
+  ]
+}

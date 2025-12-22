@@ -1,0 +1,35 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: proyecto03_n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASS}
+
+      - WEBHOOK_URL=${WEBHOOK_URL}
+      - WEBHOOK_TOKEN=${WEBHOOK_TOKEN}
+
+      - TZ=${TZ}
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+
+      # Permitir acceso controlado desde Code node
+      - N8N_ALLOW_ENV_VARS=true
+      - N8N_ALLOW_BUILTIN_MODULES=crypto
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: proyecto03_cloudflared
+    restart: unless-stopped
+    depends_on:
+      - n8n
+    command: tunnel --no-autoupdate --protocol http2 --url http://n8n:5678
+
+volumes:
+  n8n_data:

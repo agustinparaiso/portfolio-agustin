@@ -1,0 +1,13 @@
+# Secrets / env
+.env
+
+# Docker
+*.log
+
+# n8n local data (volumen)
+.n8n
+n8n_data
+
+# OS
+.DS_Store
+Thumbs.db
