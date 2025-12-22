@@ -34,17 +34,22 @@ export async function requestAi(
 
     while (true) {
       const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
+
+      if (value) {
+        buffer += decoder.decode(value, { stream: true });
+      }
 
       const events = buffer.split("\n\n");
       buffer = events.pop() ?? "";
 
       for (const event of events) {
-        const [eventLine, ...rest] = event.split("\n");
-        const dataLine = rest.find((line) => line.startsWith("data:")) ?? "";
+        if (!event.trim()) continue;
+        const lines = event.split("\n");
+        const eventLine = lines.find((l) => l.startsWith("event: ")) ?? "";
+        const dataLine = lines.find((l) => l.startsWith("data: ")) ?? "";
+
         const eventName = eventLine.replace("event: ", "").trim();
-        const data = dataLine.replace("data: ", "");
+        const data = dataLine.replace("data: ", "").trim();
 
         if (eventName === "chunk") {
           try {
@@ -56,9 +61,24 @@ export async function requestAi(
         }
 
         if (eventName === "final") {
-          finalPayload = JSON.parse(data) as StructuredAiOutput;
+          try {
+            finalPayload = JSON.parse(data) as StructuredAiOutput;
+          } catch (error) {
+            console.error("Failed to parse final payload", error);
+          }
+        }
+
+        if (eventName === "error") {
+          try {
+            const errorData = JSON.parse(data);
+            throw new Error(errorData.error?.message ?? "Stream error");
+          } catch (e: any) {
+            throw new Error(e.message ?? "Stream error");
+          }
         }
       }
+
+      if (done) break;
     }
 
     if (!finalPayload) {

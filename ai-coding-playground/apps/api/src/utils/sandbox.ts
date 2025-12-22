@@ -24,10 +24,16 @@ export function runInSandbox({ code, tests = [] }: RunRequestBody): SandboxRespo
   const consoleMock = {
     log: (...args: unknown[]) => stdout.push(args.map(String).join(" ")),
     error: (...args: unknown[]) => stderr.push(args.map(String).join(" ")),
+    assert: (condition: unknown, ...args: unknown[]) => {
+      if (!condition) {
+        throw new Error(`Assertion failed${args.length > 0 ? ": " + args.map(String).join(" ") : ""}`);
+      }
+    },
   };
 
   const sandbox: Record<string, unknown> = {
     console: consoleMock,
+    assert: consoleMock.assert, // Provide as global too
     setTimeout,
     clearTimeout,
   };

@@ -42,7 +42,7 @@ const providers: Record<string, ProviderConfig> = {
   },
   gemini: {
     name: "gemini",
-    supportsStreaming: false,
+    supportsStreaming: true,
     adapter: createGeminiAdapter(env.GEMINI_API_KEY, env.GEMINI_MODEL),
   },
 };
@@ -88,7 +88,7 @@ app.post("/api/ai", async (request, reply) => {
 
   const adapterInput = { prompt, mode, userCode, stream: stream && providerConfig.supportsStreaming };
 
-  if (stream && providerConfig.supportsStreaming) {
+  if (stream) {
     reply.raw.writeHead(200, {
       "Content-Type": "text/event-stream",
       "Cache-Control": "no-cache",
@@ -102,7 +102,9 @@ app.post("/api/ai", async (request, reply) => {
     try {
       const raw = await providerConfig.adapter.generate({
         ...adapterInput,
-        onChunk: (text) => sendEvent("chunk", JSON.stringify({ text })),
+        onChunk: providerConfig.supportsStreaming
+          ? (text) => sendEvent("chunk", JSON.stringify({ text }))
+          : undefined,
       });
       const structured = parseStructuredOutput(raw);
       sendEvent("final", JSON.stringify(structured));

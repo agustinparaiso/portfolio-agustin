@@ -20,20 +20,26 @@ export function EditorPanel({ title, code, onChange, readOnly = false, height = 
   return (
     <div className={styles.panel}>
       <div className={styles.panelHeader}>
-        <h3 className={styles.panelTitle}>{title}</h3>
-        {readOnly && <span className={styles.badge}>AI</span>}
+        <h3 className={styles.panelTitle}>{title === "My solution" ? "Mi solución" : "Solución de la IA"}</h3>
       </div>
       <Editor
-        height={height}
-        language="javascript"
-        theme="vs-light"
+        height="400px"
+        defaultLanguage="javascript"
         value={code}
-        options={{ ...defaultOptions, readOnly }}
-        onChange={(value) => onChange?.(value ?? "")}
+        onChange={(v) => onChange?.(v ?? "")}
+        theme="vs-dark"
+        options={{
+          readOnly,
+          minimap: { enabled: false },
+          fontSize: 14,
+          padding: { top: 16, bottom: 16 },
+          scrollBeyondLastLine: false,
+          roundedSelection: true,
+        }}
         onMount={(editor, monaco: Monaco) => {
           editor.addAction({
             id: "format",
-            label: "Format Document",
+            label: "Formatear Documento", // Translated label
             keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyF],
             run: () => editor.getAction("editor.action.formatDocument")?.run(),
           });
