@@ -1,0 +1,14 @@
+{
+  "name": "ai-coding-playground",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter @ai-playground/api dev\" \"pnpm --filter @ai-playground/web dev\"",
+    "build": "pnpm --filter @ai-playground/shared build && pnpm --filter @ai-playground/api build && pnpm --filter @ai-playground/web build",
+    "lint": "pnpm --filter @ai-playground/web lint"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
